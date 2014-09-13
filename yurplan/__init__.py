@@ -32,7 +32,7 @@ class YurplanClient(object):
         data = json.dumps({'email': email, 'password': password})
         r = self.session.post(self.LOGIN_API, data=data)
         if not r.ok:
-            raise IOError(r.json())
+            raise requests.HTTPError(r.json())
         self.token = r.json()['data']['token']
         self.session.params.update({'token': self.token})
 
